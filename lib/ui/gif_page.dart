@@ -22,7 +22,9 @@ class GifPage extends StatelessWidget {
         ],
       ),
       backgroundColor: Colors.black,
-      body: Center(child: Image.network(_gifData["images"]["fixed_height"]["url"]),),
+      body: Center(
+        child: Image.network(_gifData["images"]["fixed_height"]["url"]),
+      ),
     );
   }
 }

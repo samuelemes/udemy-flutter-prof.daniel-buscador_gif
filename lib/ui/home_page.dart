@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   Future<Map> _getGifs() async {
     http.Response response;
 
-    if (_search == null  || _search.isNotEmpty) {
+    if (_search == null || _search.isNotEmpty) {
       response = await http.get(
           "https://api.giphy.com/v1/gifs/trending?api_key=dvKthg1nYVuVHYkcwbdThdne0SSURf0T&limit=20&rating=G");
     } else {
@@ -113,19 +113,24 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) {
           if (_search == null || index < snapshot.data["data"].length)
             return GestureDetector(
-              child: FadeInImage.memoryNetwork(placeholder: 
-              kTransparentImage, 
-                  height: 300.0,
-                  fit: BoxFit.cover,
-                  image: snapshot.data["data"][index]["images"]
-                  ["fixed_height"]["url"],),
-                  onTap: (){
-                    Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => GifPage(snapshot.data["data"][index])));                    
-                  },
-                  onLongPress: (){
-                    Share.share(snapshot.data["data"][index]["images"]["fixed_height"]["url"]);
-                  },
+              child: FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                height: 300.0,
+                fit: BoxFit.cover,
+                image: snapshot.data["data"][index]["images"]["fixed_height"]
+                    ["url"],
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            GifPage(snapshot.data["data"][index])));
+              },
+              onLongPress: () {
+                Share.share(snapshot.data["data"][index]["images"]
+                    ["fixed_height"]["url"]);
+              },
             );
           else
             return Container(
@@ -146,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {
                   setState(() {
-                    _offSet +=19;
+                    _offSet += 19;
                   });
                 },
               ),
